@@ -11,7 +11,20 @@ class MethodChannelDeviceInfo extends DeviceInfoPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
+  }
+
+  @override
+  Future<String?> getDeviceModel() async {
+    final model = await methodChannel.invokeMethod<String>('getDeviceModel');
+    return model;
+  }
+
+  @override
+  Future<String?> getDisplaySize() async {
+    final size = await methodChannel.invokeMethod<String>('getDisplaySize');
+    return size;
   }
 }

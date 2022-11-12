@@ -17,6 +17,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  String _deviceModel = 'Unknown';
+  String _displaySize = 'Unknown';
   final _deviceInfoPlugin = DeviceInfo();
 
   @override
@@ -36,6 +38,24 @@ class _MyAppState extends State<MyApp> {
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
+    String deviceModel;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
+    try {
+      deviceModel =
+          await _deviceInfoPlugin.getDeviceModel() ?? 'Unknown deviceModel';
+    } on PlatformException {
+      deviceModel = 'Failed to get deviceModel.';
+    }
+    String displaySize;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
+    try {
+      displaySize =
+          await _deviceInfoPlugin.getDisplaySize() ?? 'Unknown displaySize';
+    } on PlatformException {
+      displaySize = 'Failed to get displaySize.';
+    }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -44,6 +64,8 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _platformVersion = platformVersion;
+      _displaySize = displaySize;
+      _deviceModel = deviceModel;
     });
   }
 
@@ -55,7 +77,13 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              Text('Device: $_deviceModel\n'),
+              Text('Display: $_displaySize\n'),
+            ],
+          ),
         ),
       ),
     );

@@ -26,4 +26,12 @@ abstract class DeviceInfoPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<String?> getDeviceModel() {
+    throw UnimplementedError('deviceModel() has not been implemented.');
+  }
+
+  Future<String?> getDisplaySize() {
+    throw UnimplementedError('displaySize() has not been implemented.');
+  }
 }

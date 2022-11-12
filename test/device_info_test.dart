@@ -7,9 +7,14 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockDeviceInfoPlatform
     with MockPlatformInterfaceMixin
     implements DeviceInfoPlatform {
-
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  Future<String?> getDeviceModel() => Future.value('42');
+
+  @override
+  Future<String?> getDisplaySize() => Future.value('42');
 }
 
 void main() {

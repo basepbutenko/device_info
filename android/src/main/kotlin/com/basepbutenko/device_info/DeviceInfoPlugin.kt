@@ -1,7 +1,7 @@
 package com.basepbutenko.device_info
 
 import androidx.annotation.NonNull
-
+import android.content.res.Resources
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -24,6 +24,10 @@ class DeviceInfoPlugin: FlutterPlugin, MethodCallHandler {
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     if (call.method == "getPlatformVersion") {
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
+    } else if (call.method == "getDisplaySize") {
+      result.success("${Resources.getSystem().getDisplayMetrics().widthPixels}x${Resources.getSystem().getDisplayMetrics().heightPixels}")
+    } else if (call.method == "getDeviceModel") {
+      result.success("${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}")
     } else {
       result.notImplemented()
     }

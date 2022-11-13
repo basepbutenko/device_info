@@ -9,6 +9,16 @@ public class SwiftDeviceInfoPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
+      if (call.method == "getPlatformVersion") {
+          result("iOS " + UIDevice.current.systemVersion)
+          } else if (call.method == "getDisplaySize") {
+              let screenRect = UIScreen.main.bounds
+              let screenWidth = screenRect.size.width
+              let screenHeight = screenRect.size.height
+              result("\(screenWidth) x \(screenHeight)")
+          } else if (call.method == "getDeviceModel") {
+              result("apple " + UIDevice.current.name)
+          }
+     
   }
 }
